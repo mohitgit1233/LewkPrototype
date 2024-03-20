@@ -284,4 +284,4 @@ To set up your own :
 
 npm install
 npm start
-# Started on port 8080
+# Started on port 8000
