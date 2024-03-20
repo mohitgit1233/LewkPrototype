@@ -1,27 +1,155 @@
-LewkPrototype
+# LewkPrototype
 
-About
+## Introduction
+Lewk is a artificialt intelligence based fashion stylist that helps people decide what to wear.
+It also gives recommendations on the basis of existing product catalogue.
 
-This project is an AI based fashion stylist that recommends items from catalogue.
+## Setup
 
-Endpoints
+### Prerequisites
 
-1 - Create Fashion Catalogue using the product API.
+- Node.js
+- OpenAI API account
 
-Request URL : 
+### Environment Configuration
+Create a `.env` file in the root directory with the following content:
 
+```shell
+PORT=8000
+OPENAI_API_KEY=<YOUR_API_KEY>
+```
+
+### Installing Dependencies
+
+Install dependencies needed for the project such as express and nodemon using :
+
+```shell
+npm install
+```
+
+## Running the Application
+
+### Start the API Server
+
+```shell
+npm start
+```
+
+## API endpoints and functionality :
+
+#### Assuming server is running at Port 8000
+
+### 1. Create an input file using the product API (GET)
+
+#### Request :
+
+```shell
 http://localhost:8000/api/createinput
+```
+#### Example Response :
 
-
-2 - Create Fashion Assistant and returns the assistant ID.
-
-Request URL : 
-
-http://localhost:8000/api/createassistant
-
-Response:
-
+```shell
 {
+    "products": [
+        {
+            "id": 8339405078761,
+            "title": "Astrid Wander Puff Sleeve Dress",
+            "handle": "astrid-wander-puff-sleeve-dress",
+            "body_html": "<p>A classic and timeless dress you will have on repeat this spring/summer.  This maxi length dress has full button closure and a puff sleeve detail.  An easy yet stylish dress to add to your wardrobe.</p>\n<p>Available in Black</p>\n<p> </p>",
+            "published_at": "2024-03-20T17:19:21-04:00",
+            "created_at": "2024-01-31T18:44:25-05:00",
+            "updated_at": "2024-03-20T18:39:23-04:00",
+            "vendor": "Astrid",
+            "product_type": "Dress",
+            "tags": [
+                "clothing",
+                "nosale"
+            ],
+            "variants": [
+                {
+                    "id": 46588431925481,
+                    "title": "Black / Small",
+                    "option1": "Black",
+                    "option2": "Small",
+                    "option3": null,
+                    "sku": "",
+                    "requires_shipping": true,
+                    "taxable": true,
+                    "featured_image": null,
+                    "available": true,
+                    "price": "140.00",
+                    "grams": 0,
+                    "compare_at_price": null,
+                    "position": 1,
+                    "product_id": 8339405078761,
+                    "created_at": "2024-01-31T18:44:26-05:00",
+                    "updated_at": "2024-03-20T18:39:23-04:00"
+                },
+                {
+                    "id": 46588431958249,
+                    "title": "Black / Medium",
+                    "option1": "Black",
+                    "option2": "Medium",
+                    "option3": null,
+                    "sku": "",
+                    "requires_shipping": true,
+                    "taxable": true,
+                    "featured_image": null,
+                    "available": true,
+                    "price": "140.00",
+                    "grams": 0,
+                    "compare_at_price": null,
+                    "position": 2,
+                    "product_id": 8339405078761,
+                    "created_at": "2024-01-31T18:44:26-05:00",
+                    "updated_at": "2024-03-20T18:39:23-04:00"
+                }
+            ],
+            "images": [
+                {
+                    "id": 42085354537193,
+                    "created_at": "2024-02-26T20:15:15-05:00",
+                    "position": 1,
+                    "updated_at": "2024-02-26T20:15:50-05:00",
+                    "product_id": 8339405078761,
+                    "variant_ids": [],
+                    "src": "https://cdn.shopify.com/s/files/1/0646/9337/1113/files/19-32009E-POWDER.jpg?v=1708996550",
+                    "width": 891,
+                    "height": 1122
+                }
+            ],
+            "options": [
+                {
+                    "name": "Color",
+                    "position": 1,
+                    "values": [
+                        "Black"
+                    ]
+                },
+                {
+                    "name": "Size",
+                    "position": 2,
+                    "values": [
+                        "Small",
+                        "Medium"
+                    ]
+                }
+            ]
+        }]
+} and more items
+```
+
+### 2. Create an AI assistant using OpenAI assistant API (GET)
+
+#### Request :
+
+```shell
+http://localhost:8000/api/createassistant
+```
+
+#### Example Response 
+
+```shell
 {
     "assistant": {
         "id": "asst_dl7fRsCp3Wxwn0Exb1s6W6TG",
@@ -40,17 +168,19 @@ Response:
         "metadata": {}
     }
 }
-}
+```
 
+### 3. Upload and attach the generated file to the AI assitant created (GET)
 
-3 - Upload the generated catalogue to the AI assitant
+#### Request :
 
-Request URL : 
-
+```shell
 http://localhost:8000/api/uploadfile
+```
 
-Response:
+#### Response :
 
+```shell
 {
     "file": {
         "object": "file",
@@ -63,15 +193,18 @@ Response:
         "status_details": null
     }
 }
+```
 
-4 - Create a thread to chat with the assistant
+### 4. Create a thread to start a conversation with the assistant (GET)
 
-Request URL (type:GET) : 
+#### Request :
 
+```shell
 http://localhost:8000/api/createthread
+```
+#### Response :
 
-Response:
-
+```shell
 {
     "thread": {
         "id": "thread_yrppwZnmc6wTz0VdarfsVGxp",
@@ -80,16 +213,27 @@ Response:
         "metadata": {}
     }
 }
+```
 
+### 5. Create a message to send to the assistant (POST)
 
-5 - Attach the message to the thread
+#### Request :
 
-Request URL (type:POST) : 
-
+```shell
 http://localhost:8000/api/sendmessage
+```
 
-Response:
+#### Request body :
 
+```shell
+{
+    "message": "Mix and match an outfit for me ?"
+}
+```
+
+#### Response :
+
+```shell
 {
     "message": {
         "id": "msg_hh4uSusbsKZefpljVtU8f0wq",
@@ -112,15 +256,19 @@ Response:
         "metadata": {}
     }
 }
+```
 
-6 - Run the thread/ Send message
+### 6. Finally send the message to the assistant and watch for the response (GET)
 
-Request URL (type:GET) : 
+#### Request :
 
+```shell
 http://localhost:8000/api/createRun
+```
 
-Response:
+#### Response :
 
+```shell
 {
     "options": {
         "method": "get",
@@ -282,13 +430,6 @@ Response:
         "last_id": "msg_hh4uSusbsKZefpljVtU8f0wq",
         "has_more": false
     }
+    ]
 }
-
-
-Using
-
-To set up your own :
-
-npm install
-npm start
-# Started on port 8000
+```
