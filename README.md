@@ -6,6 +6,13 @@ This project is an AI based fashion stylist that recommends items from catalogue
 
 Endpoints
 
+1 - Create Fashion Catalogue using the product API.
+
+Request URL : 
+
+http://localhost:8000/api/createinput
+
+
 2 - Create Fashion Assistant and returns the assistant ID.
 
 Request URL : 
