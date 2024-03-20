@@ -1,13 +1,12 @@
 const express = require('express');
 const fs = require('fs');
 
+//use this to create the catalogue file
 const createInput = async (req,res) => {
 
     const response = await fetch("https://shopwoven.ca/products.json");
     const data = await response.json()
     console.log("success")
-
-    // let data = "This is a file containing a collection of books.";
 
     fs.writeFile("clothes.txt", JSON.stringify(data), (err) => {
         if (err)
